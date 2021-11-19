@@ -11,38 +11,32 @@ public class Account {
 //    setInterestRate(float rate): void
 
 
-
+    public Account(String type) {
+        this.type = type;
+    }
 
     public void createAccount() {
         this.accountNr = 4343L;//autogenerate accountnr
     }
 
-
-    public void deposit(float amount) {
-        this.balance += amount;
-    }
-
-    public boolean withdraw(float amount) {
-        if (amount >= balance) this.balance -= amount;
-        return (amount >= balance);
-    }
-
-    public float getBalance() {
-        return balance;
-    }
-
-
     public long getAccountNr() {
         return accountNr;
     }
-
     public String getType() {
         return type;
     }
-
     public void setType(String type) {
         this.type = type;
     }
 
-
+    public void deposit(float amount) {
+        this.balance += amount;
+    }
+    public boolean withdraw(float amount) {
+        if (amount >= balance) this.balance -= amount;
+        return (amount >= balance);
+    }
+    public float getBalance() {
+        return balance;
+    }
 }
