@@ -36,8 +36,10 @@ public class Customer {
     public List<Account> getAccounts() {
         return accounts;
     }
-    public void addAccount(String type){
+    public long addAccount(String type){
         accounts.add(new Account(type));
+
+       return accounts.get(accounts.size()).getAccountNr();
     }
     public void deleteAccount(long accountNr){
         for (int i = 0; i < accounts.size(); i++) {

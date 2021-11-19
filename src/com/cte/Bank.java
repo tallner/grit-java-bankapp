@@ -105,14 +105,33 @@ public class Bank {
 
         return accountInformation;
     }
-//
-//    public addAccount(long SSN){
-//
-//    }
-//
-//    public getAccount(long SSN, int accountNr){
-//
-//    }
+
+    public long addAccount(long SSN, String accountType){
+        if (findCustomer(SSN) == -1) return -1;
+
+        return customers.get(findCustomer(SSN)).addAccount(accountType);
+    }
+
+    public String getAccount(long SSN, long accountNr){
+        if (findCustomer(SSN) == -1) return "Cannot find customer";
+
+        String returnString = "Account does not exist";
+        for (int i = 0; i < customers.get(findCustomer(SSN)).getAccounts().size(); i++) {
+            if (customers.get(findCustomer(SSN)).getAccounts().get(i).getAccountNr()==accountNr){
+                returnString =
+                        "Account number: "+
+                        accountNr
+                        +", Balance: "+
+                        customers.get(findCustomer(SSN)).getAccounts().get(i).getBalance()
+                        +", Account type: "+
+                        customers.get(findCustomer(SSN)).getAccounts().get(i).getType()
+                        +", Interest rate: "+
+                        customers.get(findCustomer(SSN)).getAccounts().get(i).getInterestRate();
+            }
+        }
+
+        return returnString;
+    }
 //
 //    public deposit(long SSN, int accountNr, int amount){
 //
