@@ -43,7 +43,7 @@ public class Bank {
 
     public boolean addCustomer(String firstName, String lastName, long SSN){
         if (findCustomer(SSN) != -1) customers.add(new Customer(firstName,lastName,SSN));
-        return findCustomer(SSN) != -1;
+        return (findCustomer(SSN) != -1);
     }
 
     public List<String> getCustomer(long SSN){
@@ -132,18 +132,50 @@ public class Bank {
 
         return returnString;
     }
-//
-//    public deposit(long SSN, int accountNr, int amount){
-//
-//    }
-//
-//    public withdraw(long SSN, int accountNr, int amount){
-//
-//    }
-//
-//    public closeAccount(long SSN, int accountNr){
-//
-//    }
+
+    public boolean deposit(long SSN, int accountNr, int amount){
+        //check if customer does not exist
+        if (findCustomer(SSN) == -1) return false;
+
+        for (int i = 0; i < customers.get(findCustomer(SSN)).getAccounts().size(); i++) {
+            if (customers.get(findCustomer(SSN)).getAccounts().get(i).getAccountNr() == accountNr) {
+                customers.get(findCustomer(SSN)).getAccounts().get(i).deposit(amount);
+            }
+        }return true;
+    }
+
+    public boolean withdraw(long SSN, int accountNr, int amount){
+        //check if customer does not exist
+        if (findCustomer(SSN) == -1) return false;
+
+        for (int i = 0; i < customers.get(findCustomer(SSN)).getAccounts().size(); i++) {
+            if (customers.get(findCustomer(SSN)).getAccounts().get(i).getAccountNr() == accountNr) {
+                if (customers.get(findCustomer(SSN)).getAccounts().get(i).getBalance() >= amount){
+                    customers.get(findCustomer(SSN)).getAccounts().get(i).withdraw(amount);
+                } else return false; //not enough cash
+
+            }
+        }return true;
+
+    }
+
+    public String closeAccount(long SSN, int accountNr){
+        if (findCustomer(SSN) == -1) return "Cannot find customer";
+
+        String returnString = "Account does not exist";
+        for (int i = 0; i < customers.get(findCustomer(SSN)).getAccounts().size(); i++) {
+            if (customers.get(findCustomer(SSN)).getAccounts().get(i).getAccountNr()==accountNr){
+                returnString =
+                        "Account number: "+
+                        accountNr
+                        +", Balance: "+
+                        customers.get(findCustomer(SSN)).getAccounts().get(i).getBalance();
+            }
+        }
+        return returnString;
+
+
+    }
 
 
 }

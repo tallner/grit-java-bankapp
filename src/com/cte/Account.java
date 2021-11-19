@@ -33,7 +33,7 @@ public class Account {
         interestRate = rate;
     }
 
-    public void deposit(float amount) {
+    public void deposit(int amount) {
         this.balance += amount;
     }
     public boolean withdraw(float amount) {
