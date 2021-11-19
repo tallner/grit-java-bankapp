@@ -79,9 +79,32 @@ public class Bank {
         return true;
     }
 
-//    public removeCustomer(long SSN){
-//
-//    }
+    public List<String> removeCustomer(long SSN){
+        //check if customer does not exist
+        if (findCustomer(SSN) == -1) return null;
+
+        List<String> accountInformation = new ArrayList<>();
+
+        for (int i = 0; i < customers.get(findCustomer(SSN)).getAccounts().size(); i++) {
+            accountInformation.add(
+                    "Account number: "+
+                    customers.get(findCustomer(SSN)).getAccounts().get(i).getAccountNr()
+                    +", Cashback: "+
+                    customers.get(findCustomer(SSN)).getAccounts().get(i).getBalance()
+                    +", Account type: "+
+                    customers.get(findCustomer(SSN)).getAccounts().get(i).getType()
+                    +", Interest: "+
+                    (customers.get(findCustomer(SSN)).getAccounts().get(i).getInterestRate() * customers.get(findCustomer(SSN)).getAccounts().get(i).getBalance())/100
+            );
+        }
+
+
+        //remove customer after account is emptied
+        customers.remove(findCustomer(SSN));
+
+
+        return accountInformation;
+    }
 //
 //    public addAccount(long SSN){
 //

@@ -6,10 +6,7 @@ public class Account {
     private float balance;
     private long accountNr;
     private String type;
-
-//    getInterestRate(): float
-//    setInterestRate(float rate): void
-
+    float interestRate;
 
     public Account(String type) {
         this.type = type;
@@ -27,6 +24,13 @@ public class Account {
     }
     public void setType(String type) {
         this.type = type;
+    }
+
+    public float getInterestRate(){
+        return interestRate;
+    }
+    public void setInterestRate(float rate) {
+        interestRate = rate;
     }
 
     public void deposit(float amount) {
