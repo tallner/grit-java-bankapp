@@ -1,5 +1,6 @@
 package com.cte;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Customer {
@@ -11,6 +12,7 @@ public class Customer {
         this.firstName = firstName;
         this.lastName = lastName;
         this.SSN = SSN;
+        this.accounts = new ArrayList<>();
     }
 
     public String getFirstName() {
@@ -36,10 +38,21 @@ public class Customer {
     public List<Account> getAccounts() {
         return accounts;
     }
-    public long addAccount(String type){
-        accounts.add(new Account(type));
+    public long addAccount(String type, float interestRate){
+        Account account = new Account(type, interestRate);
 
-       return accounts.get(accounts.size()).getAccountNr();
+        long nextAccountNr = 0;
+        for (int i = 0; i < accounts.size(); i++) {
+             if (nextAccountNr < accounts.get(i).getAccountNr()){
+                 nextAccountNr = accounts.get(i).getAccountNr();
+             }
+        }
+        nextAccountNr += 1;
+        account.createAccountNr(nextAccountNr);
+
+        accounts.add(account);
+
+        return nextAccountNr;
     }
     public void deleteAccount(long accountNr){
         for (int i = 0; i < accounts.size(); i++) {
@@ -48,5 +61,6 @@ public class Customer {
             }
         }
     }
+
 
 }

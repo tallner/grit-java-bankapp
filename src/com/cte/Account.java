@@ -1,6 +1,5 @@
 package com.cte;
 
-import java.util.List;
 
 public class Account {
     private float balance;
@@ -8,12 +7,13 @@ public class Account {
     private String type;
     float interestRate;
 
-    public Account(String type) {
+    public Account(String type, float interestRate) {
         this.type = type;
+        this.interestRate = interestRate;
     }
 
-    public void createAccount() {
-        this.accountNr = 4343L;//autogenerate accountnr
+    public void createAccountNr(long accountNr) {
+        this.accountNr = accountNr;
     }
 
     public long getAccountNr() {
@@ -22,16 +22,16 @@ public class Account {
     public String getType() {
         return type;
     }
-    public void setType(String type) {
-        this.type = type;
-    }
+ //   public void setType(String type) {
+ //       this.type = type;
+ //   }
 
     public float getInterestRate(){
         return interestRate;
     }
-    public void setInterestRate(float rate) {
-        interestRate = rate;
-    }
+//    public void setInterestRate(float rate) {
+//        interestRate = rate;
+//    }
 
     public void deposit(int amount) {
         this.balance += amount;

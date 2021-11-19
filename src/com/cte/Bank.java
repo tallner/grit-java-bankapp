@@ -106,10 +106,10 @@ public class Bank {
         return accountInformation;
     }
 
-    public long addAccount(long SSN, String accountType){
+    public long addAccount(long SSN, String accountType, float interestRate){
         if (findCustomer(SSN) == -1) return -1;
 
-        return customers.get(findCustomer(SSN)).addAccount(accountType);
+        return customers.get(findCustomer(SSN)).addAccount(accountType, interestRate);
     }
 
     public String getAccount(long SSN, long accountNr){
@@ -147,29 +147,29 @@ public class Bank {
     public boolean withdraw(long SSN, int accountNr, int amount){
         //check if customer does not exist
         if (findCustomer(SSN) == -1) return false;
+        boolean returnVal = false;
 
         for (int i = 0; i < customers.get(findCustomer(SSN)).getAccounts().size(); i++) {
             if (customers.get(findCustomer(SSN)).getAccounts().get(i).getAccountNr() == accountNr) {
-                if (customers.get(findCustomer(SSN)).getAccounts().get(i).getBalance() >= amount){
-                    customers.get(findCustomer(SSN)).getAccounts().get(i).withdraw(amount);
-                } else return false; //not enough cash
-
+                returnVal = customers.get(findCustomer(SSN)).getAccounts().get(i).withdraw(amount);
             }
-        }return true;
+        }return returnVal;
 
     }
 
     public String closeAccount(long SSN, int accountNr){
         if (findCustomer(SSN) == -1) return "Cannot find customer";
 
-        String returnString = "Account does not exist";
+        String returnString = "Account does not exist"; //SHOULD BE CHECKED IN CUSTOMER.JAVA INSTEAD
         for (int i = 0; i < customers.get(findCustomer(SSN)).getAccounts().size(); i++) {
+
             if (customers.get(findCustomer(SSN)).getAccounts().get(i).getAccountNr()==accountNr){
                 returnString =
                         "Account number: "+
                         accountNr
                         +", Balance: "+
                         customers.get(findCustomer(SSN)).getAccounts().get(i).getBalance();
+                customers.get(findCustomer(SSN)).deleteAccount(accountNr);
             }
         }
         return returnString;
