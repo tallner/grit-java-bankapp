@@ -7,6 +7,11 @@ public class Customer {
     private long SSN;
     private List<Account> accounts;
 
+    public Customer(String firstName, String lastName, long SSN) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.SSN = SSN;
+    }
 
     public String getFirstName() {
         return firstName;
