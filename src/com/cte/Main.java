@@ -1,17 +1,18 @@
 package com.cte;
 
+import java.io.IOException;
 import java.util.Scanner;
+import java.io.FileWriter;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // main takes care of the terminal and runs the application continuous until exit
         String bankName = "";
         int sel = 666;
         Scanner userSel = new Scanner(System.in);
         Bank bank = new Bank();
-        //RecordCatalogue recordCatalogue= new RecordCatalogue();
-        //Filehandler filehandler = new Filehandler();
+        Filehandler filehandler = new Filehandler();
 
 
         while(true)
@@ -21,7 +22,7 @@ public class Main {
             System.out.println(" |**********************| ");
             System.out.println(" 0. List banks "); //list customer files in a certain directory
             System.out.println(" 1. Create new bank "); //setBankName() Generates a new customer list, eg a text file
-            System.out.println(" 2. Import customer list"); //getCustomers() Reads a customer list from file
+            System.out.println(" 2. Import customer list"); //Reads a customer list from file
             System.out.println(" 3. Add a customer"); //addCustomer()
             System.out.println(" 4. Remove a customer"); //removeCustomer()
 
@@ -86,7 +87,7 @@ public class Main {
                 //list all files/banks in directory
                 case 0 -> {
                     System.out.println("Available banks:");
-//                    filehandler.listFiles();
+                    filehandler.listFiles();
                 }
 
                 //create a new customer file, eg a new bank
@@ -98,21 +99,21 @@ public class Main {
                         System.out.println("bad input");
                         userSel.next();
                     }
-                    bank.setBankName(bankName);
 
-
- //                   filehandler.createFile(bankName);
+                    filehandler.createFile(bankName);
                 }
 
-                //get customers from an existing bank
+                //read customers from an existing bank
                 case 2 -> {
-                    System.out.println(" |****************************************| ");
-                    System.out.println(" |**** List customers ****| ");
-                    System.out.println(" |****************************************| ");
-//                    System.out.println(" 0. Read gradebook");
-//                    System.out.println(" 1. HOME ");
+                    System.out.println(" |*************************************************| ");
+                    System.out.println(" |**** Read and list customers from a bankfile ****| ");
+                    System.out.println(" |*************************************************| ");
 
-                    System.out.println(bank.getCustomers());
+                    System.out.println("Name of bankfile: ");
+                    bankName = userSel.next();
+
+                    bank = filehandler.readFile(bankName);
+
 
                     //make sure the input is correct
 //                    try {
@@ -158,6 +159,14 @@ public class Main {
                     //add both to the object and the file so that you dont need to read the file again or loose if restarting
 //                    recordCatalogue.addStudent(name,SSN,grade,course);
 //                    filehandler.writeNewStudentTofile(name,SSN,grade,gradebookName);
+
+
+                    FileWriter writer = new FileWriter("testFile.txt");
+                    for(String str: bank.getCustomers()) {
+
+                        writer.write(str + System.lineSeparator());
+                    }
+                    writer.close();
 
                 }
 

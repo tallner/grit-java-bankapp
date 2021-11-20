@@ -64,5 +64,22 @@ public class Customer {
         }
     }
 
+    public void presetAccount(long accountNr, float balance, String type, float interestRate){
+        Account account = new Account(type, interestRate, accountNr, balance);
+
+//        long nextAccountNr = 1000;
+//        for (Account value : accounts) {
+//            //find largest account number
+//            if (nextAccountNr < value.getAccountNr()) {
+//                nextAccountNr = value.getAccountNr();
+//            }
+//        }
+//        nextAccountNr += 1;
+//        account.createAccountNr(nextAccountNr);
+//
+        accounts.add(account);
+
+    }
+
 
 }

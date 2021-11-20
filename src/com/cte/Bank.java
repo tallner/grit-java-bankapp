@@ -44,8 +44,24 @@ public class Bank {
             );
         }
         return customerList;
-
     }
+
+
+//    public List<String> getCustomers(){
+//        List<String> customerList = new ArrayList<>();
+//
+//        for (Customer customer : customers) {
+//            customerList.add(
+//                    customer.getFirstName()
+//                            + " " +
+//                            customer.getLastName()
+//                            + " : " +
+//                            customer.getSSN()
+//            );
+//        }
+//        return customerList;
+//
+//    }
 
     public boolean addCustomer(String firstName, String lastName, long SSN){
         //if customer not found then add the customer
@@ -124,6 +140,14 @@ public class Bank {
         return customers.get(customerIndex).addAccount(accountType, interestRate);
     }
 
+    public boolean presetAccount(long SSN, String accountType, float interestRate, float balance, long accountNr){
+        int customerIndex = findCustomer(SSN);
+        if (customerIndex == -1) return false;
+
+        customers.get(customerIndex).presetAccount(accountNr, balance, accountType, interestRate);
+        return true;
+    }
+
     public String getAccount(long SSN, long accountNr){
         int customerIndex = findCustomer(SSN);
         if (customerIndex == -1) return "Cannot find customer";
@@ -192,6 +216,5 @@ public class Bank {
 
 
     }
-
 
 }

@@ -7,6 +7,14 @@ public class Account {
     private String type;
     float interestRate;
 
+    //this constructor is only used when reading information about the accounts from a file
+    public Account(String type, float interestRate, long accountNr, float balance) {
+        this.type = type;
+        this.interestRate = interestRate;
+        this.accountNr = accountNr;
+        this.balance = balance;
+    }
+
     public Account(String type, float interestRate) {
         this.type = type;
         this.interestRate = interestRate;
