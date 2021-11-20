@@ -31,9 +31,9 @@ public class Customer {
     public long getSSN() {
         return SSN;
     }
-    public void setSSN(long SSN) {
-        this.SSN = SSN;
-    }
+//    public void setSSN(long SSN) {
+//        this.SSN = SSN;
+//    }
 
     public List<Account> getAccounts() {
         return accounts;
@@ -41,11 +41,12 @@ public class Customer {
     public long addAccount(String type, float interestRate){
         Account account = new Account(type, interestRate);
 
-        long nextAccountNr = 0;
-        for (int i = 0; i < accounts.size(); i++) {
-             if (nextAccountNr < accounts.get(i).getAccountNr()){
-                 nextAccountNr = accounts.get(i).getAccountNr();
-             }
+        long nextAccountNr = 1000;
+        for (Account value : accounts) {
+            //find largest account number
+            if (nextAccountNr < value.getAccountNr()) {
+                nextAccountNr = value.getAccountNr();
+            }
         }
         nextAccountNr += 1;
         account.createAccountNr(nextAccountNr);
@@ -58,6 +59,7 @@ public class Customer {
         for (int i = 0; i < accounts.size(); i++) {
             if (accounts.get(i).getAccountNr() == accountNr){
                 accounts.remove(i);
+                break;
             }
         }
     }
