@@ -1,19 +1,16 @@
 package com.cte;
 
-import java.io.IOException;
 import java.util.Scanner;
-import java.io.FileWriter;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         // main takes care of the terminal and runs the application continuous until exit
         String bankName = "";
         int sel = 666;
         Scanner userSel = new Scanner(System.in);
         Bank bank = new Bank();
         Filehandler filehandler = new Filehandler();
-
 
         while(true)
         {
@@ -114,36 +111,11 @@ public class Main {
 
                     bank = filehandler.readFile(bankName);
 
-
-                    //make sure the input is correct
-//                    try {
-//                        sel = userSel.nextInt();
-//                    } catch (Exception e) {
-//                        System.out.println("bad input");
-//                        userSel.next();
-//                    }
-
-//                    switch (sel){
-//                        case 0 -> {
-//                            System.out.print("Name of gradebook: ");
-//                            gradebookName = userSel.next();
-//
-//                            //read the specified file with the filehandler
-//                            try {
-//                                //read the students from the file into the catalogue object
-//                                recordCatalogue.setStudentList(filehandler.readFile(gradebookName));
-//
-//                            }
-//                            catch (Exception e){
-//                                System.out.println("An error occurred.");
-//                                e.printStackTrace();
-//                            }
-//
-//                        }
-//                        default -> System.out.println("go home") ;
-//                    }
+                    //print customer names
+                    System.out.println(bank.getCustomers());
 
                 }
+
 
                 //Add a customer
                 case 3 -> {
@@ -157,16 +129,8 @@ public class Main {
 
                     System.out.println(bank.addCustomer(firstName,lastName,SSN));
                     //add both to the object and the file so that you dont need to read the file again or loose if restarting
-//                    recordCatalogue.addStudent(name,SSN,grade,course);
-//                    filehandler.writeNewStudentTofile(name,SSN,grade,gradebookName);
+                    filehandler.writeCustomersToFile(bank,bankName);
 
-
-                    FileWriter writer = new FileWriter("testFile.txt");
-                    for(String str: bank.getCustomers()) {
-
-                        writer.write(str + System.lineSeparator());
-                    }
-                    writer.close();
 
                 }
 
@@ -176,32 +140,8 @@ public class Main {
                     long SSN = userSel.nextLong();
 
                     System.out.println(bank.removeCustomer(SSN));
+                    filehandler.writeCustomersToFile(bank,bankName);
                 }
-//
-//                //read statistics
-//                case 3 -> {
-//                    if (recordCatalogue.studentList.size()==0)
-//                        System.out.println("No gradebook selected");
-//                    else {
-//                        System.out.println("Average grade for all students are " + recordCatalogue.getAverageGrade());
-//                        System.out.println("Highest grade among all students are " + recordCatalogue.getHighestGrade());
-//                        System.out.println("Lowest grade among all students are " + recordCatalogue.getLowestGrade());
-//                    }
-//
-//                }
-//
-//                //select a student
-//                case 4 -> {
-//                    System.out.print("Student name: ");
-//                    String name = userSel.next();
-//                    String grade = recordCatalogue.findStudent(name);
-//
-//                    if (grade.equals("666")) System.out.println("Student not found");
-//                    else System.out.println(name + "´s grades:" + System.lineSeparator() + grade);
-//                }
-
-                //add a customer
-
 
                 //Get a certain customers information
                 case 5 -> {
@@ -221,8 +161,13 @@ public class Main {
                     System.out.print("Customer SSN: ");
                     long SSN = userSel.nextLong();
 
-                    if (bank.changeCustomerName(firstName, lastName, SSN)) System.out.println("Customer name changed");
-                    else {System.out.println("Customer "+SSN+" does not exist");}
+                    if (bank.changeCustomerName(firstName, lastName, SSN)){
+                        System.out.println("Customer name changed");
+                        filehandler.writeCustomersToFile(bank, bankName);
+                    }
+                    else{
+                        System.out.println("Customer "+SSN+" does not exist");
+                    }
                 }
 
                 //Add account to an existing customer
@@ -235,10 +180,7 @@ public class Main {
                     float interestRate = userSel.nextFloat();
 
                     System.out.println(bank.addAccount(SSN,accountType,interestRate));
-
-                    //add both to the object and the file so that you dont need to read the file again or loose if restarting
-//                    recordCatalogue.addGradeToStudent(name,grade,course);
-//                    filehandler.writeStudentsToFile(recordCatalogue,gradebookName);
+                    filehandler.writeCustomersToFile(bank,bankName);
 
 
                 }
@@ -266,6 +208,7 @@ public class Main {
                     int amount = userSel.nextInt();
 
                     System.out.println(bank.deposit(SSN,accountNr,amount));
+                    filehandler.writeCustomersToFile(bank,bankName);
 
                 }
 
@@ -279,6 +222,7 @@ public class Main {
                     int amount = userSel.nextInt();
 
                     System.out.println(bank.withdraw(SSN,accountNr,amount));
+                    filehandler.writeCustomersToFile(bank,bankName);
 
 
                 }
@@ -291,6 +235,7 @@ public class Main {
                     long accountNr = userSel.nextLong();
 
                     System.out.println(bank.closeAccount(SSN,accountNr));
+                    filehandler.writeCustomersToFile(bank,bankName);
 
 
                 }

@@ -39,29 +39,43 @@ public class Bank {
                     customer.getFirstName()
                     + " " +
                     customer.getLastName()
-                    + " : " +
+                    + " " +
                     customer.getSSN()
             );
         }
         return customerList;
     }
 
+    public List<String> getCustomersAndAccounts(){
+        List<String> customerList = new ArrayList<>();
+        String accountInformation = "";
 
-//    public List<String> getCustomers(){
-//        List<String> customerList = new ArrayList<>();
-//
-//        for (Customer customer : customers) {
-//            customerList.add(
-//                    customer.getFirstName()
-//                            + " " +
-//                            customer.getLastName()
-//                            + " : " +
-//                            customer.getSSN()
-//            );
-//        }
-//        return customerList;
-//
-//    }
+        for (Customer customer : customers) {
+            //add account information
+            accountInformation = "";
+            for (int i = 0; i < customer.getAccounts().size(); i++) {
+                accountInformation +=
+                        customer.getAccounts().get(i).getAccountNr()
+                        + " " +
+                        customer.getAccounts().get(i).getType()
+                        + " " +
+                        customer.getAccounts().get(i).getInterestRate()
+                        + " " +
+                        customer.getAccounts().get(i).getBalance();
+                if(i < (customer.getAccounts().size())-1) accountInformation += " , ";
+            }
+            customerList.add(
+                    customer.getFirstName()
+                    + " " +
+                    customer.getLastName()
+                    + " " +
+                    customer.getSSN()
+                    + " : " +
+                    accountInformation
+            );
+        }
+        return customerList;
+    }
 
     public boolean addCustomer(String firstName, String lastName, long SSN){
         //if customer not found then add the customer
