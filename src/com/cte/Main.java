@@ -15,7 +15,7 @@ public class Main {
         while(true)
         {
             System.out.println(" |**********************| ");
-            System.out.println(" |****     MAIN MENU     ****| ");
+            System.out.println(" |****     MENU     ****| ");
             System.out.println(" |**********************| ");
             System.out.println(" 0. List banks "); //list customer files in a certain directory
             System.out.println(" 1. Create new bank "); //setBankName() Generates a new customer list, eg a text file
