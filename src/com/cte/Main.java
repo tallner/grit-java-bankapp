@@ -12,6 +12,8 @@ public class Main {
         Bank bank = new Bank();
         Filehandler filehandler = new Filehandler();
 
+
+
         while(true)
         {
             System.out.println(" |**********************| ");
