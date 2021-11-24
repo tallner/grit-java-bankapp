@@ -4,7 +4,7 @@ final project in the basic java course. fictive bank app
 How to use
 
 Not much error handling is implemented, the app needs to be used in correct order.  
-Start with either create a new banklist or select an already existing.  
+Start with either create a new banklist or select an already existing, for example the mockData that is created when the app is launched.  
 If you select an existing file, customers needs to have at least on account.  
   
 File needs to follow this pattern:  
