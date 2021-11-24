@@ -244,6 +244,18 @@ public class Main {
 
                 }
 
+                case 12 -> {
+
+                    System.out.print("Customer SSN: ");
+                    long SSN = userSel.nextLong();
+                    System.out.print("Account: ");
+                    long account = userSel.nextLong();
+
+                    System.out.println(bank.addCreditCard(SSN, account));
+                }
+
+
+
                 default -> System.out.println("0");
             }
         }

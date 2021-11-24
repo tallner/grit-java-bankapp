@@ -5,7 +5,7 @@ public class Account {
     private float balance;
     private long accountNr;
     private String type;
-    float interestRate;
+    private float interestRate;
 
     //this constructor is only used when reading information about the accounts from a file
     public Account(String type, float interestRate, long accountNr, float balance) {

@@ -154,6 +154,13 @@ public class Bank {
         return customers.get(customerIndex).addAccount(accountType, interestRate);
     }
 
+    public long addCreditCard(long SSN, long accountNr){
+        int customerIndex = findCustomer(SSN);
+        if (customerIndex == -1) return -1;
+
+        return customers.get(customerIndex).addCreditcard(SSN, accountNr);
+    }
+
     public boolean presetAccount(long SSN, String accountType, float interestRate, float balance, long accountNr){
         int customerIndex = findCustomer(SSN);
         if (customerIndex == -1) return false;
