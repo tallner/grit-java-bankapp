@@ -13,7 +13,6 @@ public class Main {
         Filehandler filehandler = new Filehandler();
 
 
-
         while(true)
         {
             System.out.println(" |**********************| ");
