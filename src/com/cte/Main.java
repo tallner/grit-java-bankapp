@@ -12,7 +12,10 @@ public class Main {
         Bank bank = new Bank();
         Filehandler filehandler = new Filehandler();
 
+        // creates a mockdata file in _bankfiles so you can start playing around with correct fileformat
+        filehandler.writeCustomersToFile(MockingData.initiateMymockMyData(new Bank()),"mockBank.txt");
 
+        //simple UI to test the methods
         while(true)
         {
             System.out.println(" |**********************| ");
