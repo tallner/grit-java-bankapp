@@ -1,4 +1,0 @@
-FirstName1 LastName1 19990101 : 1001 credit 1.4 4.0 , 1002 credit 1.45 16.0 , 1003 credit 1.46 256.0
-FirstName2 LastName2 19990202 : 1001 credit 1.5 4.0
-FirstName3 LastName3 19990303 : 1001 credit 1.8 4.0
-testcust testcu 900918 : 
